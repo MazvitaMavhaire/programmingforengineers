@@ -32,7 +32,7 @@ samples=malloc(1000*sizeof(WaveformSample));
 fscanf(file, "%&*[
 
 while (fscanf(file, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf"
-                  &samples[count].timestamp,
+                  &samples[count].timestamp,//error
                   &samples[count].phaseA,
                   &samples[count].phaseB,
                   &samples[count].phaseC,
