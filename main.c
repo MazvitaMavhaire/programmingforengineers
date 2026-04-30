@@ -5,7 +5,9 @@
 #include "waveform.h"
 #include "io.h"
 
-int main((int argc, char *argv[]) {
+
+
+int main(int argc, char *argv[]) {
     printf("Power Analyser Started\n");
     /*
     argc = number of command-line arguments
@@ -53,7 +55,8 @@ int main((int argc, char *argv[]) {
         return 1;
     }
     memcpy(sortedSamples, samples, count * sizeof(WaveformSample));
-    sortSamplesByVoltageMagnitude(sortedSamples, count, PHASE_A)
+
+    sortSamplesByVoltageMagnitude(sortedSamples, count, PHASE_A);
     /*
  Write final report.
  */
@@ -80,3 +83,4 @@ int main((int argc, char *argv[]) {
     free(samples);
     return 0;
 }
+

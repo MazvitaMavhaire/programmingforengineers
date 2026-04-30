@@ -18,9 +18,8 @@
  *getPhaseVoltage()
  * i.e. receives one sample and returns voltage for all phases
  */
-double(const WaveformSample*sample,PhaseSelector phase) {
-    if(phase==PHASE_A) {
-        return sample->phaseA;
+double getPhaseVoltage(const WaveformSample*sample,PhaseSelector phase){
+    if(phase==PHASE_A) {return sample->phaseA;
     }
     if(phase==PHASE_B) {
         return sample->phaseB;
