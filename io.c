@@ -23,7 +23,7 @@ WaveformSample*loadCSV(const char *filename,int*count) {
 
         sscanf(line, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf",
                &row.timestamp,
-               &row.phaseA
+               &row.phaseA,
                & row.phaseB,
                &row.phaseC,
                &row.current,
@@ -40,3 +40,4 @@ WaveformSample*loadCSV(const char *filename,int*count) {
 
     fclose(file);
     return samples;
+}
