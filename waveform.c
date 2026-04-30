@@ -13,12 +13,13 @@
 
 #include "waveform.h"
 #include <math.h> // mainly for sqrt and fabs
-
+#include<stdlib.h>
 /*
  *getPhaseVoltage()
  * i.e. receives one sample and returns voltage for all phases
- */
-double getPhaseVoltage(const WaveformSample*sample,PhaseSelector phase){
+ *
+ *
+ */ double getPhaseVoltage(const WaveformSample *sample, PhaseSelector phase){
     if(phase==PHASE_A) {return sample->phaseA;
     }
     if(phase==PHASE_B) {
@@ -35,9 +36,10 @@ double getPhaseVoltage(const WaveformSample*sample,PhaseSelector phase){
             return sample->"Phase A";
         }
         if(phase==PHASE_B) {
-            return sample->"Phase B";
+            return sample->"Phase_B";
         }
-        return "Phase C";
+    if(phase==PHASE_C) {
+        return sample->"Phase_C";
         }
         /*
          * hasStatusFlag():checks whether bitwise flag is on
@@ -160,3 +162,4 @@ double getPhaseVoltage(const WaveformSample*sample,PhaseSelector phase){
 
 
 
+}
