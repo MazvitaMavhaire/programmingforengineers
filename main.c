@@ -1,7 +1,6 @@
 include <stdio.h> // allows printing
 #include <stdlib.h>
 #include "waveform.h"
-
 #include "io.h"
 
 int main() {
@@ -11,11 +10,10 @@ return 0;
     int count=0;//how many rows loaded
   //load files and return pointer rows 
     
-FILE*file;
 WaveformSample*samples= loadCSV("power_quality_log.csv");
 
 
-if (file==NULL){
+if (samples==NULL){
 printf("Error opening file.\n");
 return 1;
 }
