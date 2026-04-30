@@ -1,50 +1,28 @@
 include <stdio.h> // allows printing
 #include <stdlib.h>
-#include <math.h>
+#include "waveform.h"
 
-#ifndef WAVEFORM_H
-#define WAVEFORM_H
-
-typedef struct{
-    double timestamp;
-    double phaseA;
-    double phaseB;
-    double phaseC;
-    double current;
-    double frequency;
-    double powerFactor;
-    double thd;
-} WaveformSample;
+#include "io.h"
 
 int main() {
 printf("Power Analyer Started\n");
+return 0;
 
+    int count=0;//how many rows loaded
+  //load files and return pointer rows 
+    
 FILE*file;
-WaveformSample*samples;
-file= fopen("power_quality_log.csv", "r");
+WaveformSample*samples= loadCSV("power_quality_log.csv");
+
 
 if (file==NULL){
 printf("Error opening file.\n");
 return 1;
 }
-samples=malloc(1000*sizeof(WaveformSample));
+    printf("Loaded %d samples\n", count);
 
-fscanf(file, "%&*[
+    free(samples);
 
-while (fscanf(file, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf"
-                  &samples[count].timestamp,//error
-                  &samples[count].phaseA,
-                  &samples[count].phaseB,
-                  &samples[count].phaseC,
-                  &samples[count].current,
-                  &samples[count].frequency,
-                  &samples[count].powerFactor,
-                  &samples[count].thd) == 8) {
-        count++;
-    }
-free(samples);
-    fclose(file);
-return0;
-}
+    return 0;
 
    
