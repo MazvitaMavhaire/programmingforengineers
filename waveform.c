@@ -14,12 +14,16 @@
 #include "waveform.h"
 #include <math.h> // mainly for sqrt and fabs
 #include<stdlib.h>
+#include <lmaccess.h>
+#include <rpcndr.h>
+
 /*
  *getPhaseVoltage()
  * i.e. receives one sample and returns voltage for all phases
  *
  *
- */ double getPhaseVoltage(const WaveformSample *sample, PhaseSelector phase){
+ */ double getPhaseVoltage(const WaveformSample*sample,
+                           size_t count,PhaseSelector phase){
     if(phase==PHASE_A) {return sample->phaseA;
     }
     if(phase==PHASE_B) {
@@ -32,27 +36,26 @@
      * getPhaseName:turns phases into readable text
      */
     const char* getPhaseName(PhaseSelector phase);
-        if(phase==PHASE_A) {
-            return sample->"Phase A";
+{       if(phase==PHASE_A) {
+            return sample->phaseA;
         }
         if(phase==PHASE_B) {
-            return sample->"Phase_B";
+            return sample->phaseB;
         }
-    if(phase==PHASE_C) {
-        return sample->"Phase_C";
+        return sample->phaseC;
         }
-        /*
+     /*
          * hasStatusFlag():checks whether bitwise flag is on
          */
-        int hasStatusFlag(uint8_t flags,uint8_t flag){
-            return (flags & flag) != 0;
+        int hasStatusFlag(uint8_t flags,uint8_t flag);
+{           return (uint8_t flags,uint8_t flag)!=0;
         }
         /*
          * analysePhase():main maths function
          */
-        PhaseMetrics analysePhase(const WaveformSample* samples,
-                                  size_t count,PhaseSelector phase) {
-            PhaseMetrics metrics;
+        PhaseMetrics analysePhase(const WaveformSample* sample,
+                                  size_t count,PhaseSelector phase);
+{          PhaseMetrics metrics;
             //set all results to starting default
             metrics.rms = 0.0;
             metrics.peakToPeak = 0.0;
@@ -65,13 +68,13 @@
             metrics.withinTolerance = 0.0;
             metrics.statusFlags = 0.0;
 
-            if (samples == NULL || count == 0) {
+            if (sample == NULL || count == 0) {
                 return metrics;
             }
             double sum = 0.0;
             double sumSquares = 0.0;
             //First voltage is starting min and max
-            double firstVoltage = getPhaseVoltage(samples, phase,&count);
+            double firstVoltage = getPhaseVoltage(sample, phase, (PhaseSelector) &count);
             double minVoltage = firstVoltage;
             double maxVoltage = firstVoltage;
             /*
@@ -79,7 +82,7 @@
              */
             for (size_t i = 0; i < count; i++) {
                 //pointer to sample i
-                const WaveformSample *currentSample = samples + i;
+                const WaveformSample *currentSample = sample + i;
                 double voltage = getPhaseVoltage(currentSample, phase,&count);
 
                 sum += voltage;
@@ -108,7 +111,7 @@
 
             for (size_t i = 0; i < count; i++) {
 
-                const WaveformSample *currentSample = samples + i;
+                const WaveformSample *currentSample = sample + i;
                 double voltage = getPhaseVoltage(currentSample,phase,&count);
 
                 double difference = voltage - metrics.dcOffset;
@@ -137,7 +140,7 @@
                   */
 
                  void sortSamplesByVoltageMagnitude(WaveformSample *samples,
-                                               size_t count,PhaseSelector phase) {
+                                               size_t count,PhaseSelector phase){
                 if (samples == NULL || count == 0){
                     return;
                 }

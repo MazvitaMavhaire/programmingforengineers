@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
     }
     memcpy(sortedSamples, samples, count * sizeof(WaveformSample));
 
-    sortSamplesByVoltageMagnitude(sortedSamples, count, PHASE_A);
+  void  sortSamplesByVoltageMagnitude(WaveformSample*samples, size_t count, PhaseSelector phase);
     /*
  Write final report.
  */
