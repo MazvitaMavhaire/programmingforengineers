@@ -3,4 +3,4 @@ project(Clion C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(Clion main.c io.h io.c)
+add_executable(Clion main.c io.h io.c waveform.c)
