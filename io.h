@@ -1,5 +1,5 @@
-#ifndef UNTITLED_IO_H
-#define UNTITLED_IO_H
+#ifndef MAIN_C_IO_H
+#define MAIN_C_IO_H
 
 #include "waveform.h"
 
