@@ -12,6 +12,7 @@
 #include <stdint.h> //gives us uint8_t
 
 #define NOMINAL_RMS_VOLTAGE 230.0// expected RMS voltage for each phase
+#define RMS_TOLERANCE_PERCENT 10.0//allow tolerance of 10%
 
 typedef struct{
     double timestamp;
