@@ -5,12 +5,11 @@ include <stdio.h> // allows printing
 
 int main() {
 printf("Power Analyer Started\n");
-return 0;
 
     int count=0;//how many rows loaded
   //load files and return pointer rows 
     
-WaveformSample*samples= loadCSV("power_quality_log.csv");
+WaveformSample*samples= loadCSV("power_quality_log.csv", & count);
 
 
 if (samples==NULL){
@@ -22,5 +21,5 @@ return 1;
     free(samples);
 
     return 0;
-
+}
    
