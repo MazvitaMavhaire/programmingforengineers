@@ -1,5 +1,5 @@
-#ifndef UNTITLED_WAVEFORM_H
-#define UNTITLED_WAVEFORM_H
+#ifndef WAVEFORM_H
+#define WAVEFORM_H
 
 typedef struct{
     double timestamp;
@@ -12,4 +12,4 @@ typedef struct{
     double thd;
 } WaveformSample;
 
-#endif //UNTITLED_WAVEFORM_H
+#endif
