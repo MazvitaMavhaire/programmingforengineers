@@ -1,0 +1,3 @@
+C:/Users/mv2-mavhaire/OneDrive - UWE Bristol/main.c/cmake-build-debug/CMakeFiles/main_c.dir
+C:/Users/mv2-mavhaire/OneDrive - UWE Bristol/main.c/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/mv2-mavhaire/OneDrive - UWE Bristol/main.c/cmake-build-debug/CMakeFiles/rebuild_cache.dir

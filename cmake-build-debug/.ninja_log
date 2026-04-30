@@ -1,0 +1,8 @@
+# ninja log v5
+1	299	7992670052649340	CMakeFiles/main_c.dir/waveform.c.obj	47f4edad28cde0b0
+10	341	7992688396185675	CMakeFiles/main_c.dir/io.c.obj	acadf15086ff2ce4
+5	367	7992689824520502	CMakeFiles/main_c.dir/main.c.obj	b209f80aed56bcd7
+16	374	7992689824520502	CMakeFiles/main_c.dir/io.c.obj	acadf15086ff2ce4
+374	797	7992689828806789	main_c.exe	51b2ccceba9de75e
+5	223	7992691765055354	CMakeFiles/main_c.dir/main.c.obj	b209f80aed56bcd7
+225	500	7992691767801736	main_c.exe	51b2ccceba9de75e
