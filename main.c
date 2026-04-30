@@ -1,10 +1,10 @@
-include <stdio.h> // allows printing
+#include <stdio.h> // allows printing
 #include <stdlib.h>
 #include "waveform.h"
 #include "io.h"
 
 int main() {
-printf("Power Analyer Started\n");
+printf("Power Analyser Started\n");
 
     int count=0;//how many rows loaded
   //load files and return pointer rows 
