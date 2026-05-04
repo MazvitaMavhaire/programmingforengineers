@@ -1,13 +1,11 @@
 #ifndef WAVEFORM_H
 #define WAVEFORM_H
-/*
- * waveform.h
- */
-#include <stddef.h>//gives us size_t
-#include <stdint.h>//gives us uint8_t
+#include <stddef.h>
+
+#include <stdint.h>
 
 #define NOMINAL_RMS_VOLTAGE 230.0//EXPECTED RMS
-#define RMS_TOLERANCE_PERCENT 10.0//TOLERANCE ALLOWANCE
+#define RMS_TOLERANCE_PERCENT 10.0 //TOLERANCE ALLOWANCE
 #define CLIPPING_LIMIT 324.9 // CLIPPING THRESHOLD
 #define DC_OFFSET_LIMIT 5.0// if average voltage is more than this, flag the DC offset
 
@@ -16,17 +14,7 @@
 #define STATUS_OUT_OF_TOLERANCE 0X02// bit1
 #define STATUS_DC_OFFSET 0X04// bit 2
 
-/*
- * WaveformSample stores one row from the CSV file
- * one row contains
- * - timestamp
- * -phase A voltage
- * -phase B voltage
- * -phase C voltage
- * -current
- * -frequency
- *- power factor
- */
+
 
 typedef struct{
     double timestamp;
@@ -68,9 +56,8 @@ typedef enum {
 PhaseMetrics analysePhase(const WaveformSample*samples,
                           size_t count,PhaseSelector phase);
 
-//Voltage Value from one sample depending o current phase
-double getPhaseVoltage(const WaveformSample*samples,
-                       size_t count,PhaseSelector phase);
+void sortSamplesByVoltageMagnitude(WaveformSample*samples,size_t count,PhaseSelector phase);
+
 
 //check for status flag
 

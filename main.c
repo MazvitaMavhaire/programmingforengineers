@@ -1,7 +1,6 @@
 #include <stdio.h> // allows printing
 #include <stdlib.h>
 #include <string.h>
-
 #include "waveform.h"
 #include "io.h"
 
@@ -32,12 +31,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     printf("Loaded %zu samples successfully.\n", count);
-    /*
- Analyse each phase.
- metrics[0] = Phase A
- metrics[1] = Phase B
- metrics[2] = Phase C
- */
+
     PhaseMetrics metrics[3];
     metrics[0] = analysePhase(samples, count, PHASE_A);
     metrics[1] = analysePhase(samples, count, PHASE_B);
@@ -47,16 +41,14 @@ int main(int argc, char *argv[]) {
     sorting samples by Phase A voltage magnitude.
     We copy samples first so the original data stays unchanged.
     */
-    WaveformSample *sortedSamples =
-            malloc(count * sizeof(WaveformSample));
+    WaveformSample *sortedSamples =malloc(count * sizeof(WaveformSample));
     if (sortedSamples == NULL) {
-        printf("Error: could not allocate memory for sorting.\n");
+        printf("Error, could not allocate memory for sorting.\n");
         free(samples);
         return 1;
     }
     memcpy(sortedSamples, samples, count * sizeof(WaveformSample));
-
-  void  sortSamplesByVoltageMagnitude(WaveformSample*samples, size_t count, PhaseSelector phase);
+    sortSamplesByVoltageMagnitude(sortedSamples,count,PHASE_A);
     /*
  Write final report.
  */
@@ -68,7 +60,7 @@ int main(int argc, char *argv[]) {
                                     sortedSamples,
                                     count);
     if (!reportWritten) {
-        printf("Error: could not write results.txt\n");
+        printf("Error, could not write results.txt\n");
         free(sortedSamples);
         free(samples);
         return 1;

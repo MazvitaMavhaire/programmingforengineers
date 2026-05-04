@@ -3,33 +3,21 @@
 #include "io.h"
 #include <string.h>
 
-/*
- countDataRows()
- Counts how many data rows are in the CSV file.
- Why?
- The coursework requires malloc sized to the number of rows.
- So first we count rows, then allocate exact memory.
-*/
+
 static size_t countDataRows(FILE *file) {
     char line[512];
     size_t count = 0;
-    // Skip header line
     fgets(line, sizeof(line), file);
-    // Count each remaining non-empty line
+
     while (fgets(line, sizeof(line), file)) {
         if (strlen(line) > 1) {
             count++;
         }
     }
-    // Return file pointer to start
+
     rewind(file);
     return count;
 }
-/*
- loadCSV()
- Opens the CSV file, counts rows, allocates memory,
- reads each row, and stores it in WaveformSample array.
- */
 int loadCSV(const char *filename,
             WaveformSample **samplesOut,
             size_t *countOut) {
@@ -38,21 +26,17 @@ int loadCSV(const char *filename,
         return 0;
     }
     size_t rowCount = countDataRows(file);
-
     if (rowCount == 0) {
         fclose(file);
         return 0;
     }
-    WaveformSample *samples =
-            malloc(rowCount * sizeof(WaveformSample));
+    WaveformSample *samples =malloc(rowCount * sizeof(WaveformSample));
     if (samples == NULL) {
         fclose(file);
         return 0;
     }
     char line[512];
-    // Skip header row
     fgets(line, sizeof(line), file);
-
     size_t index = 0;
     while (fgets(line, sizeof(line), file) && index < rowCount) {
         WaveformSample sample;
@@ -78,10 +62,7 @@ int loadCSV(const char *filename,
     *countOut = index;
     return 1;
 }
-/*
- writePhaseReport()
- Helper function that writes one phase section.
-*/
+
 static void writePhaseReport(FILE *file,
                              const char *phaseName,
                              PhaseMetrics metrics){
@@ -115,10 +96,7 @@ static void writePhaseReport(FILE *file,
     }
     fprintf(file, "\n");
 }
-/*
- writeReport()
- Writes the final results.txt file.
-*/
+
 int writeReport(const char *filename,
                 const char *inputFilename,
                 const WaveformSample *samples,

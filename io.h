@@ -3,7 +3,7 @@
 
 #include "waveform.h"
 #include <stddef.h>
-#include "waveform.h"
+
 // Loads CSV file into dynamic memory
 int loadCSV(const char *filename,
             WaveformSample **samplesOut,
