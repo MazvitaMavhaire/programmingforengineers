@@ -1,11 +1,11 @@
 #include <stdint.h>
 #include <stdio.h>
+#include <math.h>
 #include "waveform.h"
-#include <math.h> // mainly for sqrt and fabs
 
 
 double getPhaseVoltage(const WaveformSample*samples,
-                           size_t count,PhaseSelector phase) {
+                           PhaseSelector phase) {
     if(phase==PHASE_A) {return samples->phaseA;
     }
     if(phase==PHASE_B) { return samples->phaseB;
@@ -14,22 +14,22 @@ double getPhaseVoltage(const WaveformSample*samples,
     }
 
     const char* getPhaseName (PhaseSelector phase) {
-{       if(phase==PHASE_A) {
-            return "Phase A";
-        }
-        if(phase==PHASE_B) {
-            return "Phase B";
-        }
+     if(phase==PHASE_A) {
+         return "Phase A";
+     }
+     if(phase==PHASE_B) {
+         return "Phase B";
+     }
         return "Phase C";
         }
+
         int hasStatusFlag (uint8_t flags,uint8_t flag) {
     return (flags & flag)!=0;
         }
 
         PhaseMetrics analysePhase(const WaveformSample* samples,
-                                  size_t count,PhaseSelector phase)
-{
-    PhaseMetrics metrics;
+                                  size_t count,PhaseSelector phase) {
+            PhaseMetrics metrics;
             //set all results to starting default
             metrics.rms = 0.0;
             metrics.peakToPeak = 0.0;
@@ -60,9 +60,11 @@ double getPhaseVoltage(const WaveformSample*samples,
                 sum += voltage;
                 sumSquares += voltage * voltage;
 
-                if (voltage < minVoltage) { minVoltage = voltage;
+                if (voltage < minVoltage) {
+                    minVoltage = voltage;
                 }
-                if (voltage > maxVoltage) { maxVoltage = voltage;
+                if (voltage > maxVoltage) {
+                    maxVoltage = voltage;
                 }
                 if (fabs(voltage) >= CLIPPING_LIMIT) {
                     metrics.clippedSamples++;
@@ -82,7 +84,7 @@ double getPhaseVoltage(const WaveformSample*samples,
             for (size_t i = 0; i < count; i++) {
 
                 const WaveformSample *currentSample = samples + i;
-                double voltage = getPhaseVoltage(currentSample,phase);
+                double voltage = getPhaseVoltage(currentSample, phase);
 
                 double diff = voltage - metrics.dcOffset;
                 varianceSum += diff * diff;
@@ -90,7 +92,7 @@ double getPhaseVoltage(const WaveformSample*samples,
             metrics.variance = varianceSum / count;
             metrics.standardDeviation = sqrt(metrics.variance);
             //RMS range
-            double lowerLimit=NOMINAL_RMS_VOLTAGE * 0.90;
+            double lowerLimit = NOMINAL_RMS_VOLTAGE * 0.90;
             double upperLimit = NOMINAL_RMS_VOLTAGE * 1.10;
 
             if (metrics.rms >= lowerLimit && metrics.rms <= upperLimit) {
@@ -103,6 +105,7 @@ double getPhaseVoltage(const WaveformSample*samples,
                 metrics.statusFlags |= STATUS_CLIPPING;
             }
             return metrics;
+        }
 
 
                  void sortSamplesByVoltageMagnitude(WaveformSample *samples,
@@ -125,8 +128,8 @@ double getPhaseVoltage(const WaveformSample*samples,
                          samples[j] = key;
                      }
                  }
-}
-}
+
+
 
 
 
